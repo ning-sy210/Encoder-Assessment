@@ -3,16 +3,17 @@ import java.util.HashMap;
 
 public class ReferenceTable {
     private char[] table;
-    private HashMap<Character, Character> shiftTable;
     private char offsetChar;
+    private HashMap<Character, Character> shiftTable;
+    private HashMap<Character, Character> reverseShiftTable;
 
     public ReferenceTable(char[] table, char offsetChar) {
         this.table = table;
         this.offsetChar = offsetChar;
-        generateShiftTable();
+        generateShiftTables();
     }
 
-    private void generateShiftTable() {
+    private void generateShiftTables() {
         int offset = -1;
 
         for (int i = 0; i < table.length; i++) {
@@ -24,27 +25,39 @@ public class ReferenceTable {
 
         if (offset == 0) {
             shiftTable = null;
+            reverseShiftTable = null;
             return;
         }
-        HashMap<Character, Character> result = new HashMap<>();
+
+        HashMap<Character, Character> newShiftTable = new HashMap<>();
+        HashMap<Character, Character> newReverseShiftTable = new HashMap<>();
 
         for (int i = 0; i < table.length; i++) {
             char mappedChar = table[(i - offset) % table.length];
-            result.put(table[i], mappedChar);
+            newShiftTable.put(table[i], mappedChar);
+            newReverseShiftTable.put(mappedChar, table[i]);
         }
 
-        shiftTable = result;
+        shiftTable = newShiftTable;
+        reverseShiftTable = newReverseShiftTable;
     }
 
     public char getOffsetChar() {
         return offsetChar;
     }
 
-    public char lookup(char c) {
-        if (shiftTable == null || !shiftTable.containsKey(c))
-            return c;
+    public char encrypt(char plainTextChar) {
+        if (shiftTable == null || !shiftTable.containsKey(plainTextChar))
+            return plainTextChar;
 
-        return shiftTable.get(c);
+        return shiftTable.get(plainTextChar);
+    }
+
+    public char decrypt(char encodedChar) {
+        if (reverseShiftTable == null || !reverseShiftTable.containsKey(encodedChar))
+            return encodedChar;
+
+        return reverseShiftTable.get(encodedChar);
     }
 
     public void setTable(char[] table) {
@@ -52,7 +65,7 @@ public class ReferenceTable {
             return;
 
         this.table = table;
-        generateShiftTable();
+        generateShiftTables();
     }
 
     public void setOffsetChar(char offsetChar) {
@@ -60,6 +73,6 @@ public class ReferenceTable {
             return;
 
         this.offsetChar = offsetChar;
-        generateShiftTable();
+        generateShiftTables();
     }
 }
