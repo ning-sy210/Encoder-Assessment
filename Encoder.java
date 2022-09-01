@@ -15,7 +15,7 @@ public class Encoder implements EncoderInterface {
         res += refTable.getOffsetChar();
 
         for (int i = 0; i < plainText.length(); i++) {
-            res += refTable.encrypt(plainText.charAt(i));
+            res += refTable.getEncryptionOf(plainText.charAt(i));
         }
 
         return res;
@@ -30,7 +30,7 @@ public class Encoder implements EncoderInterface {
         refTable.setOffsetChar(offsetChar);
 
         for (int i = 0; i < encodedStr.length(); i++) {
-            res += refTable.decrypt(encodedStr.charAt(i));
+            res += refTable.getDecryptionOf(encodedStr.charAt(i));
         }
         return res;
     }

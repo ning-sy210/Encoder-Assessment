@@ -46,14 +46,14 @@ public class ReferenceTable {
         return offsetChar;
     }
 
-    public char encrypt(char plainTextChar) {
+    public char getEncryptionOf(char plainTextChar) {
         if (shiftTable == null || !shiftTable.containsKey(plainTextChar))
             return plainTextChar;
 
         return shiftTable.get(plainTextChar);
     }
 
-    public char decrypt(char encodedChar) {
+    public char getDecryptionOf(char encodedChar) {
         if (reverseShiftTable == null || !reverseShiftTable.containsKey(encodedChar))
             return encodedChar;
 
