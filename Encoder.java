@@ -1,7 +1,11 @@
 public class Encoder implements EncoderInterface {
-    ReferenceTable refTable;
+    private ReferenceTable refTable;
 
     public Encoder(ReferenceTable refTable) {
+        this.refTable = refTable;
+    }
+
+    public void setRefTable(ReferenceTable refTable) {
         this.refTable = refTable;
     }
 
