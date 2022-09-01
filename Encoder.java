@@ -11,13 +11,27 @@ public class Encoder implements EncoderInterface {
 
     @Override
     public String encode(String plainText) {
-        // TODO Auto-generated method stub
-        return null;
+        String res = "";
+        res += refTable.getOffsetChar();
+
+        for (int i = 0; i < plainText.length(); i++) {
+            res += refTable.encrypt(plainText.charAt(i));
+        }
+
+        return res;
     }
 
     @Override
-    public String decode(String EncodedText) {
-        // TODO Auto-generated method stub
-        return null;
+    public String decode(String encodedText) {
+        char offsetChar = encodedText.charAt(0);
+        String encodedStr = encodedText.substring(1);
+        String res = "";
+
+        refTable.setOffsetChar(offsetChar);
+
+        for (int i = 0; i < encodedStr.length(); i++) {
+            res += refTable.decrypt(encodedStr.charAt(i));
+        }
+        return res;
     }
 }
