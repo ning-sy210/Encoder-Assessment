@@ -6,13 +6,13 @@ public class Encoder implements EncoderInterface {
     }
 
     @Override
-    public String encode(String s, char offset) {
+    public String encode(String plainText) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public String decode(String s) {
+    public String decode(String EncodedText) {
         // TODO Auto-generated method stub
         return null;
     }

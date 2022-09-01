@@ -1,5 +1,5 @@
 public interface EncoderInterface {
-    public String encode(String s, char offset);
+    public String encode(String plainText);
 
-    public String decode(String s);
+    public String decode(String encodedText);
 }
