@@ -33,7 +33,7 @@ public class ReferenceTable {
         HashMap<Character, Character> newReverseShiftTable = new HashMap<>();
 
         for (int i = 0; i < table.length; i++) {
-            char mappedChar = table[(i - offset) % table.length];
+            char mappedChar = table[Math.floorMod((i - offset), table.length)];
             newShiftTable.put(table[i], mappedChar);
             newReverseShiftTable.put(mappedChar, table[i]);
         }
