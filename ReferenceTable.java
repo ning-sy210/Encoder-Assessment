@@ -23,7 +23,7 @@ public class ReferenceTable {
             }
         }
 
-        if (offset == 0) {
+        if (offset <= 0) {
             shiftTable = null;
             reverseShiftTable = null;
             return;
